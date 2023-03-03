@@ -2,7 +2,7 @@
 # encoding: utf-8
 """
 @author: xingrong.peng
-@file: __init__.py.py
+@file: main_window.py.py
 @time: 2023/3/3 下午12:08
 """
 
@@ -14,6 +14,15 @@ import yaml
 from PyQt6.QtWidgets import *
 # from conf import IO_yamls
 # from conftest import edit_choice_yaml
+
+"""
+1.新增压测机器人数量
+2.可以查看不同压测机器人的数据
+3.可以选择不同机器人配置进行执行脚本
+    3.1 单独子弹窗，每执行1个压测的机器人脚本就启动1个子弹窗
+    3.2 已启动的机器人脚本不可继续启动，需等原来的脚本停掉
+4.脚本的结果文档可以拷贝到自己指定的工作目录/显示工作目录
+"""
 
 
 class MainWindow(QWidget):
@@ -33,102 +42,73 @@ class MainWindow(QWidget):
 
         # 引用grid布局
         self.grid = QGridLayout()
-        # grid.setSpacing(5)
 
         # 说明文案区
         self.configuration_one = QLabel('一、文案\n'
                                         '二、文案')
-        # 新增机器人按钮
-        self.add_robot = QPushButton('新增机器人')
+        # -----------------分割符-----------------
+        # 区域分割符
+        self.label1 = QLabel('— — ' * 20)
+
+        # 刷新按钮
         self.renovate = QPushButton('刷新')
+
+        # 文案
+        self.robot_times = QLabel('当前可执行机器人：')
+        self.run_robot_times = QLabel('当前正在执行的机器人数量：')
 
         # 运行脚本按钮
         self.run_button = QPushButton('运行脚本')
 
-        # 输入框文案
-        self.save_tip = QLabel()
-        self.devices_id = QLabel(' '*18 + 'stress_test_config.ini文件：')
-        self.upgrade_version = QLabel(' '*6 + 'robot_adb_config.ini文件：')
-        self.downgrade_version = QLabel('downgrade_version：')
-
         # 输入框
-        self.log_text = QTextEdit()
-        self.devices_id_ql = QLineEdit()
-        self.upgrade_version_ql = QLineEdit()
-        self.downgrade_version_ql = QLineEdit()
-        self.config_text = QTextEdit()
+        self.robot_times_edit = QLineEdit()
 
+        # -----------------分割符-----------------
         # 区域分割符
-        self.label1 = QLabel('— — '*14 + '第1个脚本' + '— — '*14)
-        self.label2 = QLabel(' ')
-        # self.label3 = QLabel(' ')
-        # self.mouse_right_click = QPushButton('鼠标右击')
-        # self.sleep_time_button = QPushButton('写入时间')
-        # self.clear_text = QPushButton('删除上一个配置')
-        # self.clear_text_all = QPushButton('删除全部配置')
-        # self.save_text = QPushButton('保存配置')
+        self.label2 = QLabel('— — '*6 + '当前选中第1个机器人' + '— — '*6)
+
+        # 文案
+        self.save_tip = QLabel()
+        self.stress_test_config = QLabel('stress_test_config.ini文件：')
+        self.robot_adb_config = QLabel('robot_adb_config.ini文件：')
+
+        # 文件文本框
+        self.stress_test_config_text = QTextEdit()
+        self.robot_adb_config_text = QTextEdit()
 
         self.setLayout(self.grid)
         self.main_win()
         self.show()
 
     def main_win(self):
-        # 左边配置按钮
-        # self.button_one.clicked.connect(self.configuration_one)
-        # self.button_two.clicked.connect(self.configuration_two)
-        # self.button_three.clicked.connect(self.configuration_three)
-
-        # 配置框
-        self.config_text.setPlaceholderText('请选择配置')
-        self.config_text.setReadOnly(True)  # 只读
-        self.log_text.setPlaceholderText('执行配置后显示log')
-        self.log_text.setReadOnly(True)  # 只读
-
         # 输入框默认文案
-        self.devices_id_ql.setPlaceholderText('机器人devices_id')
-        self.upgrade_version_ql.setPlaceholderText('ota升级的固件版本')
-        self.downgrade_version_ql.setPlaceholderText('需要验证的固件版本')
+        self.robot_times_edit.setPlaceholderText('ota升级的固件版本')
 
-        # self.coordinate_x.resize(1, 2)
-        # self.coordinate_y.resize(2, 3)
-        # self.coordinate_button.clicked.connect(self.edit_coordinate)
-        # self.mouse_left_click.clicked.connect(self.left_click)
-        # self.mouse_right_click.clicked.connect(self.right_click)
-        # self.sleep_time_edit.setPlaceholderText('单位:s')
-        # self.sleep_time_button.clicked.connect(self.t_edit)
-        # self.clear_text.clicked.connect(self.text_clear)
-        # self.clear_text_all.clicked.connect(self.text_clear_all)
-        # self.save_text.clicked.connect(self.save_configuration)
-
-        # 说明文案区
+        # 说明文案
         self.grid.addWidget(self.configuration_one, 1, 0, 1, 10)  # x, y, n, m。x是第几行，y是第几列，n是占多少行，m是多少列
 
+        # -----------分割符------------
         # 区域分割符
         self.grid.addWidget(self.label1, 2, 0, 1, 9)
-        self.grid.addWidget(self.label2, 3, 0, 1, 9)
-        # self.grid.addWidget(self.label3, 9, 0, 1, 9)
 
-        # 输入框文案
-        self.grid.addWidget(self.devices_id, 4, 6, 1, 1)
-        self.grid.addWidget(self.upgrade_version, 5, 6, 1, 1)
-        self.grid.addWidget(self.downgrade_version, 6, 6, 1, 1)
+        # 文案
+        self.grid.addWidget(self.robot_times, 3, 0)
+        self.grid.addWidget(self.run_robot_times, 4, 0)
 
-        # 输入框
-        self.grid.addWidget(self.devices_id_ql, 4, 7, 1, 3)
-        self.grid.addWidget(self.upgrade_version_ql, 5, 7, 1, 3)
-        self.grid.addWidget(self.downgrade_version_ql, 6, 7, 1, 3)
-        # grid.addWidget(self.button_choice, 2, 4, 1, 2)
+        # 按钮
+        self.grid.addWidget(self.run_button, 5, 0)
+        self.grid.addWidget(self.renovate, 3, 2)
 
-        # 内容框
-        # self.grid.addWidget(self.log_text, 10, 0, 1, 10)
-        self.grid.addWidget(self.config_text, 4, 1, 6, 5)
+        # -----------分割符------------
+        # 区域分割符
+        self.grid.addWidget(self.label2, 6, 0, 1, 9)
+        # 文件内容说明文案
+        self.grid.addWidget(self.stress_test_config, 7, 0, 1, 1)
+        self.grid.addWidget(self.robot_adb_config, 7, 4, 1, 1)
 
-        # 配置文件
-        self.grid.addWidget(self.robot_adb_config, 4, 0)
-        self.grid.addWidget(self.stress_test_config, 5, 0)
-
-        # 运行脚本按钮
-        self.grid.addWidget(self.run_button, 9, 0)
+        # 文件内容框
+        self.grid.addWidget(self.robot_adb_config_text, 7, 5, 5, 3)
+        self.grid.addWidget(self.stress_test_config_text, 7, 1, 5, 3)
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, '关闭', "是否关闭程序?")
