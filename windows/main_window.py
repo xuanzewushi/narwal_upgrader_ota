@@ -12,8 +12,8 @@ import time
 
 import yaml
 from PyQt6.QtWidgets import *
-from robot_data_times import get_robot_times as rb_times
 from conf import *
+from oprate_ini_file import *
 
 """
 1.新增压测机器人数量
@@ -51,10 +51,10 @@ class MainWindow(QWidget):
 
         # 刷新按钮
         self.renovate = QPushButton('刷新')
-        self.renovate.clicked.connect(self.renovate)
+        self.renovate.clicked.connect(self.renovate_click)
 
         # 文案
-        self.robot_times = QLabel('当前可执行机器人：' + rb_times())
+        self.robot_times = QLabel('当前可执行机器人：' + get_robot_times())
         self.run_robot_times = QLabel('当前正在执行的机器人数量：')
 
         # 运行脚本按钮
@@ -68,7 +68,7 @@ class MainWindow(QWidget):
         self.label2 = QLabel('— — '*13 + '当前选中第1个机器人' + '— — '*13)
 
         # 文案
-        self.robot_data = QLabel('所拥有的机器人：')
+        self.robot_data = QLabel('所拥有的机器人：' + get_robots())
         self.stress_test_config = QLabel('stress_test_config.ini文件：')
         self.robot_adb_config = QLabel('robot_adb_config.ini文件：')
 
@@ -113,7 +113,7 @@ class MainWindow(QWidget):
         self.grid.addWidget(self.label2, 6, 0, 1, 9)
 
         # 所拥有的机器人
-        self.grid.addWidget(self.robot_data, 7, 0)
+        self.grid.addWidget(self.robot_data, 7, 0, 1, 10)
 
         # 按钮
         self.grid.addWidget(self.change_file, 8, 0)
@@ -141,27 +141,27 @@ class MainWindow(QWidget):
             event.ignore()
 
     def get_data(self, name):
-        """
-        :param name: file name
-        :return:
-        """
+        print(get_ini_data(name))
         return get_ini_data(name)
 
     def write_stress_test_config(self):
-        path = 'upgrader_ota_file'
+        path = 'upgrader_stress_test_one'
         name = 'stress_test_config.ini'
         data = self.stress_test_config_text.toPlainText()
         write_ini_data(path, name, data)
 
     def write_robot_adb_config(self):
-        path = 'upgrader_ota_file'
+        path = 'upgrader_stress_test_one'
         name = 'robot_adb_config.ini'
         data = self.robot_adb_config_text.toPlainText()
         write_ini_data(path, name, data)
 
-    def renovate(self):
-        self.stress_test_config_text.setPlainText(self.get_data('stress_test_config.ini'))
-        self.robot_adb_config_text.setPlainText(self.get_data('robot_adb_config.ini'))
+    def renovate_click(self):
+        path = 'upgrader_stress_test_one'
+        stress_name = 'stress_test_config.ini'
+        robot_name = 'robot_adb_config.ini'
+        self.stress_test_config_text.setPlainText(self.get_data(stress_name))
+        self.robot_adb_config_text.setPlainText(self.get_data(robot_name))
 
 
 
