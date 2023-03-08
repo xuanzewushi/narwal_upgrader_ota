@@ -12,6 +12,8 @@ import time
 
 import yaml
 from PyQt6.QtWidgets import *
+from robot_data_times import get_robot_times as rb_times
+from conf import *
 
 """
 1.新增压测机器人数量
@@ -49,9 +51,10 @@ class MainWindow(QWidget):
 
         # 刷新按钮
         self.renovate = QPushButton('刷新')
+        self.renovate.clicked.connect(self.renovate)
 
         # 文案
-        self.robot_times = QLabel('当前可执行机器人：')
+        self.robot_times = QLabel('当前可执行机器人：' + rb_times())
         self.run_robot_times = QLabel('当前正在执行的机器人数量：')
 
         # 运行脚本按钮
@@ -71,10 +74,16 @@ class MainWindow(QWidget):
 
         # 文件文本框
         self.stress_test_config_text = QTextEdit()
+        self.stress_test_config_text.setPlainText(self.get_data('stress_test_config.ini'))
         self.robot_adb_config_text = QTextEdit()
+        self.robot_adb_config_text.setPlainText(self.get_data('robot_adb_config.ini'))
 
         # 按钮
         self.change_file = QPushButton('切换机器人配置')
+        self.write_stress_test_config_text = QPushButton('保存编辑')
+        self.write_stress_test_config_text.clicked.connect(self.write_stress_test_config)
+        self.write_robot_adb_config_text = QPushButton('保存编辑')
+        self.write_robot_adb_config_text.clicked.connect(self.write_robot_adb_config)
 
         # 输入框
         self.change_file_line = QLineEdit()
@@ -106,8 +115,10 @@ class MainWindow(QWidget):
         # 所拥有的机器人
         self.grid.addWidget(self.robot_data, 7, 0)
 
-        # 切换机器人配置文件按钮
+        # 按钮
         self.grid.addWidget(self.change_file, 8, 0)
+        self.grid.addWidget(self.write_stress_test_config_text, 13, 0)
+        self.grid.addWidget(self.write_robot_adb_config_text, 13, 4)
 
         # 切换机器人输入框
         self.grid.addWidget(self.change_file_line, 8, 1, 1, 3)
@@ -128,6 +139,29 @@ class MainWindow(QWidget):
             event.accept()
         else:
             event.ignore()
+
+    def get_data(self, name):
+        """
+        :param name: file name
+        :return:
+        """
+        return get_ini_data(name)
+
+    def write_stress_test_config(self):
+        path = 'upgrader_ota_file'
+        name = 'stress_test_config.ini'
+        data = self.stress_test_config_text.toPlainText()
+        write_ini_data(path, name, data)
+
+    def write_robot_adb_config(self):
+        path = 'upgrader_ota_file'
+        name = 'robot_adb_config.ini'
+        data = self.robot_adb_config_text.toPlainText()
+        write_ini_data(path, name, data)
+
+    def renovate(self):
+        self.stress_test_config_text.setPlainText(self.get_data('stress_test_config.ini'))
+        self.robot_adb_config_text.setPlainText(self.get_data('robot_adb_config.ini'))
 
 
 
