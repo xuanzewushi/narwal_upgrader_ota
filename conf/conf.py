@@ -21,6 +21,15 @@ def get_robots():
         robots = robots + i + ', '
     return robots
 
+
+def get_robot():
+    robot_file_times = os.listdir('./upgrader_ota_file/')
+    robots = ''
+    for i in robot_file_times:
+        robots = robots + i + ', '
+    return robots
+
+
 #
 # if __name__ == '__main__':
 #     get_robots()

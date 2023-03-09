@@ -13,7 +13,7 @@ import time
 import yaml
 from PyQt6.QtWidgets import *
 from conf import *
-from oprate_ini_file import *
+from oprate_ini_file import OprateIni
 
 """
 1.新增压测机器人数量
@@ -24,7 +24,7 @@ from oprate_ini_file import *
 """
 
 
-class MainWindow(QWidget):
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         # 设置最大化窗口
@@ -38,6 +38,9 @@ class MainWindow(QWidget):
         self.move(qr.topLeft())
         # 窗口title
         self.setWindowTitle('upgrade_ota升级脚本界面')
+
+        # widget
+        widget = QWidget()
 
         # 引用grid布局
         self.grid = QGridLayout()
@@ -66,6 +69,7 @@ class MainWindow(QWidget):
         # -----------------分割符-----------------
         # 区域分割符
         self.label2 = QLabel('— — '*13 + '当前选中第1个机器人' + '— — '*13)
+        self.label2.repaint()
 
         # 文案
         self.robot_data = QLabel('所拥有的机器人：' + get_robots())
@@ -74,21 +78,31 @@ class MainWindow(QWidget):
 
         # 文件文本框
         self.stress_test_config_text = QTextEdit()
-        self.stress_test_config_text.setPlainText(self.get_data('stress_test_config.ini'))
+        self.stress_test_config_text.setPlainText(self.get_data('upgrade_stress_test_one', 'stress_test_config.ini'))
         self.robot_adb_config_text = QTextEdit()
-        self.robot_adb_config_text.setPlainText(self.get_data('robot_adb_config.ini'))
+        self.robot_adb_config_text.setPlainText(self.get_data('upgrade_stress_test_one', 'robot_adb_config.ini'))
 
         # 按钮
         self.change_file = QPushButton('切换机器人配置')
+        self.change_file.clicked.connect(self.change_robot)
         self.write_stress_test_config_text = QPushButton('保存编辑')
         self.write_stress_test_config_text.clicked.connect(self.write_stress_test_config)
         self.write_robot_adb_config_text = QPushButton('保存编辑')
         self.write_robot_adb_config_text.clicked.connect(self.write_robot_adb_config)
 
-        # 输入框
+        # 切换机器人输入框
         self.change_file_line = QLineEdit()
+        self.change_file_line.setText('upgrade_stress_test_one')
 
         self.setLayout(self.grid)
+
+        # 状态栏
+        # self.statusBar()
+
+        # 定义widget布局为grid
+        widget.setLayout(self.grid)
+        self.setCentralWidget(widget)
+        self.statusBar()
         self.main_win()
         self.show()
 
@@ -140,31 +154,47 @@ class MainWindow(QWidget):
         else:
             event.ignore()
 
-    def get_data(self, name):
-        print(get_ini_data(name))
-        return get_ini_data(name)
+    def get_data(self, path, name):
+        return OprateIni(path, name).read_ini_data()
 
     def write_stress_test_config(self):
-        path = 'upgrader_stress_test_one'
+        path = 'upgrade_stress_test_one'
         name = 'stress_test_config.ini'
         data = self.stress_test_config_text.toPlainText()
-        write_ini_data(path, name, data)
+        OprateIni(path, name, data).write_ini_data()
+        self.status_charge('写入成功！')
 
     def write_robot_adb_config(self):
-        path = 'upgrader_stress_test_one'
+        path = 'upgrade_stress_test_one'
         name = 'robot_adb_config.ini'
         data = self.robot_adb_config_text.toPlainText()
-        write_ini_data(path, name, data)
+        OprateIni(path, name, data).write_ini_data()
+        self.status_charge('写入成功！')
 
     def renovate_click(self):
-        path = 'upgrader_stress_test_one'
+        path = 'upgrade_stress_test_one'
         stress_name = 'stress_test_config.ini'
         robot_name = 'robot_adb_config.ini'
-        self.stress_test_config_text.setPlainText(self.get_data(stress_name))
-        self.robot_adb_config_text.setPlainText(self.get_data(robot_name))
+        self.stress_test_config_text.setPlainText(self.get_data(path, stress_name))
+        self.robot_adb_config_text.setPlainText(self.get_data(path, robot_name))
 
+    def change_robot(self):
+        path = self.change_file_line.text()
+        stress_name = 'stress_test_config.ini'
+        robot_name = 'robot_adb_config.ini'
+        robot_list = ['one', 'two', 'three', 'four', 'five']
+        for i in range(len(robot_list)):
+            if robot_list[i] == path.split('_')[-1]:
+                self.label2.setText('— — '*13 + '当前选中第' + str(i+1) + '个机器人' + '— — '*13)
+        self.stress_test_config_text.setPlainText(self.get_data(path, stress_name))
+        self.robot_adb_config_text.setPlainText(self.get_data(path, robot_name))
+        self.status_charge('切换配置成功！')
 
+    def status_charge(self, msg):
+        self.statusBar().showMessage(msg)
 
+    # def information(self):
+    #     information = QMessageBox.information(self, '警告！', '11111')
 
 
 
