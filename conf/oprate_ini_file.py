@@ -9,7 +9,7 @@
 
 class OprateIni(object):
     def __init__(self, path, name, data=''):
-        self._path = './upgrader_ota_file/' + path + '/config/' + name
+        self._path = './upgrade_ota_file/' + path + '/config/' + name
         self._data = data
 
     def read_ini_data(self):

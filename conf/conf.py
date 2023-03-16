@@ -10,12 +10,12 @@ import os
 
 
 def get_robot_times():
-    robot_file_times = os.listdir('./upgrader_ota_file/')
+    robot_file_times = os.listdir('./upgrade_ota_file/')
     return str(len(robot_file_times))
 
 
 def get_robots():
-    robot_file_times = os.listdir('./upgrader_ota_file/')
+    robot_file_times = os.listdir('./upgrade_ota_file/')
     robots = ''
     for i in robot_file_times:
         robots = robots + i + ', '
@@ -23,7 +23,7 @@ def get_robots():
 
 
 def get_robot():
-    robot_file_times = os.listdir('./upgrader_ota_file/')
+    robot_file_times = os.listdir('./upgrade_ota_file/')
     robots = ''
     for i in robot_file_times:
         robots = robots + i + ', '

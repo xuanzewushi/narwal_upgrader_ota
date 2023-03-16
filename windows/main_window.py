@@ -46,8 +46,8 @@ class MainWindow(QMainWindow):
         self.grid = QGridLayout()
 
         # 说明文案区
-        self.configuration_one = QLabel('一、当前可执行机器人\n'
-                                        '二、文案')
+        self.configuration_one = QLabel('一、每个脚本只能单独运行一次，如果存在已运行的脚本，则不可再次运行\n'
+                                        '二、其他')
         # -----------------分割符-----------------
         # 区域分割符
         self.label1 = QLabel('— — ' * 30)
@@ -62,6 +62,7 @@ class MainWindow(QMainWindow):
 
         # 运行脚本按钮
         self.run_button = QPushButton('运行脚本')
+        self.run_button.clicked.connect(self.upgrade)
 
         # 输入框
         # self.robot_times_edit = QLineEdit()
@@ -193,8 +194,20 @@ class MainWindow(QMainWindow):
     def status_charge(self, msg):
         self.statusBar().showMessage(msg)
 
-    # def information(self):
-    #     information = QMessageBox.information(self, '警告！', '11111')
+    def upgrade(self):
+        upgrade_stress_test_one = "gnome-terminal -e 'bash -c \"echo asdf1234 |sudo -S ./upgrade_ota_file/upgrade_stress_test_one/upgrade_stress_test; exec bash\"'"
+        upgrade_stress_test_two = "gnome-terminal -e 'bash -c " \
+                                  "\"echo asdf1234 |sudo -S ./upgrade_ota_file/upgrade_stress_test_two/upgrade_stress_test; exec bash\"'"
+        upgrade_stress_test_three = "gnome-terminal -e 'bash -c " \
+                                    "\"echo asdf1234 |sudo -S ./upgrade_ota_file/upgrade_stress_test_three/upgrade_stress_test; exec bash\"'"
+        # 执行脚本
+        if self.change_file_line.text() == 'upgrade_stress_test_one':
+            os.system(upgrade_stress_test_one)
+        elif self.change_file_line.text() == 'upgrade_stress_test_two':
+            os.system(upgrade_stress_test_two)
+        else:
+            os.system(upgrade_stress_test_three)
+
 
 
 

@@ -31,7 +31,7 @@ class ChildWindow(QDialog):
 
         # log文本框
         self.log_text = QTextEdit()
-        self.log_text.setPlainText(self.log_text_now())
+        self.log_text.setPlainText('111')
         self.log_text.setReadOnly(True)
 
         #
@@ -44,5 +44,5 @@ class ChildWindow(QDialog):
     def log_text_now(self):
         # 需要使用多线程运行，否则会卡死
         # 使用sudo：echo %s|sudo -S %s' % (password, command)
-        log = os.popen('echo asdf1234 |sudo -S ./upgrader_ota_file/upgrade_stress_test_one/upgrade_stress_test')
+        log = os.popen('echo asdf1234 |sudo -S ./upgrade_ota_file/upgrade_stress_test_one/upgrade_stress_test')
         return log.readlines()
