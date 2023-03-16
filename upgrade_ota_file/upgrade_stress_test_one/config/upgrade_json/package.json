@@ -1,77 +1,53 @@
 {
-    "firmware_version": "v00.01.01.129",
+    "firmware_version": "v00.04.01.178",
     "firmware_list": [
         {
-            "firmware_name": "IP1221_0210_DR_GD01_v00.00.01.168_2022-12-09-15-11.bin",
-            "md5": "b72d01acb480e14e0243262de970a986",
+            "firmware_name": "IP1221-S_0210_DR_GD02_v00.01.04.102_2023-03-07-16-09.bin",
+            "md5": "e345a632ca3b094c62d58f8d28af807d",
             "description": "",
-            "firmware_size": 74792,
-            "firmware_version": "v00.00.01.168",
-            "firmware_id": "0210_DR_GD01"
+            "firmware_size": 76240,
+            "firmware_version": "v00.01.04.102",
+            "firmware_id": "0210_DR_GD02"
         },
         {
-            "firmware_name": "IP1221_0211_WL_TEK1_v01.04.00.66_2022-12-09-15-11.bin",
-            "md5": "c75be5c55b9672aa299f2ba3fbb465f0",
+            "firmware_name": "IP1221-S_0211_WL_TEK1_v02.02.00.80_2023-03-07-16-04.bin",
+            "md5": "e166ac06ac45741dd0f0bab8671facba",
             "description": "",
-            "firmware_size": 107012,
-            "firmware_version": "v01.04.00.66",
+            "firmware_size": 111396,
+            "firmware_version": "v02.02.00.80",
             "firmware_id": "0211_WL_TEK1"
         },
         {
-            "firmware_name": "IP1221_0200_SU_813A_v00.01.01.129_2022-12-09-15-23.tar.gz",
-            "md5": "bc8270242c8e7cafb754e28773e13825",
+            "firmware_name": "IP1221-S_0200_SU_813A_v00.04.01.178_2023-03-07-16-13.tar.gz",
+            "md5": "5604d4fbcbf7aa064880cf156fea6dde",
             "description": "",
-            "firmware_size": 237593729,
-            "firmware_version": "v00.01.01.129",
+            "firmware_size": 273146837,
+            "firmware_version": "v00.04.01.178",
             "firmware_id": "0200_SU_813A"
         },
         {
-            "firmware_name": "IP1221_0100_BM_ITEA_v00.01.01.125_2022-12-09-15-12.PKG",
-            "md5": "85ce803556b20b8facd36a1d2ffa66a7",
+            "firmware_name": "IP1221-S_0100_BM_ITEA_v00.03.01.207_2023-03-07-16-10.PKG",
+            "md5": "e817b7c583d4be067433a4f789d8704d",
             "description": "",
-            "firmware_size": 11519330,
-            "firmware_version": "v00.01.01.125",
+            "firmware_size": 1013549,
+            "firmware_version": "v00.03.01.207",
             "firmware_id": "0100_BM_ITEA"
         },
         {
-            "firmware_name": "IP1221_0101_DR_ST01_v01.01.00.211_2022-12-09-15-09.bin",
-            "md5": "b4d0878189a82982877bccddf5931cc3",
+            "firmware_name": "IP1221-S_0101_DR_ST01_v00.01.01.124_2023-03-07-16-02.bin",
+            "md5": "76d115460daa1d0d15b9a8925e0f68a4",
             "description": "",
-            "firmware_size": 66892,
-            "firmware_version": "v01.01.00.211",
+            "firmware_size": 75836,
+            "firmware_version": "v00.01.01.124",
             "firmware_id": "0101_DR_ST01"
         },
         {
-            "firmware_name": "IP1221_0102_WL_TEK1_v01.04.00.66_2022-12-09-15-11.bin",
-            "md5": "c75be5c55b9672aa299f2ba3fbb465f0",
+            "firmware_name": "IP1221-S_0102_WL_TEK1_v02.02.00.80_2023-03-07-16-04.bin",
+            "md5": "c167ad96ead749b8987fb7250d0951e6",
             "description": "",
-            "firmware_size": 107012,
-            "firmware_version": "v01.04.00.66",
+            "firmware_size": 111380,
+            "firmware_version": "v02.02.00.80",
             "firmware_id": "0102_WL_TEK1"
-        },
-        {
-            "firmware_name": "IP1221_0100_FR_ITEA_v00.03.06.34_2022-12-09-15-12.PKG",
-            "md5": "ba2d2772b82043b7b60708292c61d046",
-            "description": "",
-            "firmware_size": 1199707,
-            "firmware_version": "v00.03.06.34",
-            "firmware_id": "0100_FR_ITEA"
-        },
-        {
-            "firmware_name": "IP1221_0100_FR_ITEB_v00.03.00.23_2022-12-09-15-12.PKG",
-            "md5": "94505e941db71e58bd25c91203083fe4",
-            "description": "",
-            "firmware_size": 349,
-            "firmware_version": "v00.03.00.23",
-            "firmware_id": "0100_FR_ITEB"
-        },
-        {
-            "firmware_name": "IP1221_0200_FR_813A_v01.02.00.00_2022-12-09-15-23.tar.gz",
-            "md5": "acab2427c3e1513e1f9877c69134de1a",
-            "description": "",
-            "firmware_size": 20470049,
-            "firmware_version": "v01.02.00.00",
-            "firmware_id": "0200_FR_813A"
         }
     ]
 }

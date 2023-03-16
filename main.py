@@ -4,7 +4,7 @@
 # author：SelDIs
 import os
 import sys
-from PyQt6.QtWidgets import *
+from PyQt6.QtWidgets import QApplication
 from windows.main_window import MainWindow
 
 

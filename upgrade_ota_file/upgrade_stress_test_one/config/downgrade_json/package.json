@@ -1,61 +1,53 @@
 {
-    "firmware_version": "v00.04.01.107",
+    "firmware_version": "v00.04.01.177",
     "firmware_list": [
         {
-            "firmware_name": "IP1221_0200_FR_813A_v00.01.00.01_2023-02-24-08-51.tar.gz",
-            "md5": "15d52cb0e86d52e750d3222cfd04f7ab",
+            "firmware_name": "IP1221-S_0210_DR_GD02_v00.01.04.101_2023-03-07-15-44.bin",
+            "md5": "a82ee3a11065db56a33783e6962a3564",
             "description": "",
-            "firmware_size": 3566211,
-            "firmware_version": "v00.01.00.01",
-            "firmware_id": "0200_FR_813A"
+            "firmware_size": 76240,
+            "firmware_version": "v00.01.04.101",
+            "firmware_id": "0210_DR_GD02"
         },
         {
-            "firmware_name": "IP1221_0101_DR_ST01_v00.01.00.136_2023-02-24-08-39.bin",
-            "md5": "6373e1789631f9a80c4995b7f7981b1c",
+            "firmware_name": "IP1221-S_0211_WL_TEK1_v02.02.00.79_2023-03-07-15-40.bin",
+            "md5": "4411827c194203eb7e939261f59ab0e9",
             "description": "",
-            "firmware_size": 68920,
-            "firmware_version": "v00.01.00.136",
-            "firmware_id": "0101_DR_ST01"
-        },
-        {
-            "firmware_name": "IP1221_0200_SU_813A_v00.04.01.107_2023-02-24-08-51.tar.gz",
-            "md5": "eb03a5ee25e82b78a2ba39f82bde3a65",
-            "description": "",
-            "firmware_size": 261962922,
-            "firmware_version": "v00.04.01.107",
-            "firmware_id": "0200_SU_813A"
-        },
-        {
-            "firmware_name": "IP1221_0100_BM_ITEA_v00.03.01.131_2023-02-24-08-47.PKG",
-            "md5": "216d4872dc5c53f53225787c4f8746f9",
-            "description": "",
-            "firmware_size": 895571,
-            "firmware_version": "v00.03.01.131",
-            "firmware_id": "0100_BM_ITEA"
-        },
-        {
-            "firmware_name": "IP1221-S_0211_WL_TEK1_v02.01.00.81_2023-02-24-08-44.bin",
-            "md5": "7f823e6d35ddcd5b084c3e9d0ff6df20",
-            "description": "",
-            "firmware_size": 106228,
-            "firmware_version": "v02.01.00.81",
+            "firmware_size": 111396,
+            "firmware_version": "v02.02.00.79",
             "firmware_id": "0211_WL_TEK1"
         },
         {
-            "firmware_name": "IP1221-S_0102_WL_TEK1_v02.01.00.81_2023-02-24-08-44.bin",
-            "md5": "03b1a5704af31ac96e3fbe523bb67ce4",
+            "firmware_name": "IP1221-S_0200_SU_813A_v00.04.01.177_2023-03-07-15-49.tar.gz",
+            "md5": "c15772e76583c1b4de9cbc4ab8387598",
             "description": "",
-            "firmware_size": 106212,
-            "firmware_version": "v02.01.00.81",
-            "firmware_id": "0102_WL_TEK1"
+            "firmware_size": 273660186,
+            "firmware_version": "v00.04.01.177",
+            "firmware_id": "0200_SU_813A"
         },
         {
-            "firmware_name": "IP1221_0210_DR_GD02_v00.01.03.134_2023-02-24-08-45.bin",
-            "md5": "f170e585313c719523257d9b9e52ec14",
+            "firmware_name": "IP1221-S_0100_BM_ITEA_v00.03.01.206_2023-03-07-15-46.PKG",
+            "md5": "ca1ca355b2fc9b4285e2e4bc8f66fd91",
             "description": "",
-            "firmware_size": 80288,
-            "firmware_version": "v00.01.03.134",
-            "firmware_id": "0210_DR_GD02"
+            "firmware_size": 1013549,
+            "firmware_version": "v00.03.01.206",
+            "firmware_id": "0100_BM_ITEA"
+        },
+        {
+            "firmware_name": "IP1221-S_0101_DR_ST01_v00.01.01.123_2023-03-07-15-38.bin",
+            "md5": "2dcd23900f2f93d0a5cf9648309c7d43",
+            "description": "",
+            "firmware_size": 75836,
+            "firmware_version": "v00.01.01.123",
+            "firmware_id": "0101_DR_ST01"
+        },
+        {
+            "firmware_name": "IP1221-S_0102_WL_TEK1_v02.02.00.79_2023-03-07-15-40.bin",
+            "md5": "bd413ea57a17f433c0161dff8f6f4615",
+            "description": "",
+            "firmware_size": 111380,
+            "firmware_version": "v02.02.00.79",
+            "firmware_id": "0102_WL_TEK1"
         }
     ]
 }

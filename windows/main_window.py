@@ -58,7 +58,7 @@ class MainWindow(QMainWindow):
 
         # 文案
         self.robot_times = QLabel('当前可执行机器人：' + get_robot_times())
-        self.run_robot_times = QLabel('当前正在执行的机器人数量：')
+        # self.run_robot_times = QLabel('当前正在执行的机器人数量：')
 
         # 运行脚本按钮
         self.run_button = QPushButton('运行脚本')
@@ -117,7 +117,7 @@ class MainWindow(QMainWindow):
 
         # 文案
         self.grid.addWidget(self.robot_times, 3, 0)
-        self.grid.addWidget(self.run_robot_times, 4, 0)
+        # self.grid.addWidget(self.run_robot_times, 4, 0)
 
         # 按钮
         self.grid.addWidget(self.run_button, 5, 0)
