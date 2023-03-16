@@ -2,7 +2,7 @@
 # encoding: utf-8
 """
 @author: xingrong.peng
-@file: conf.py
+@file: config.py
 @time: 2023/3/3 下午4:35
 """
 

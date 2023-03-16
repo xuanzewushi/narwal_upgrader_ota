@@ -12,8 +12,8 @@ import time
 
 import yaml
 from PyQt6.QtWidgets import *
-from conf import *
-from oprate_ini_file import OprateIni
+from conf.config import *
+from conf.oprate_ini_file import OprateIni
 
 """
 1.新增压测机器人数量
@@ -46,8 +46,14 @@ class MainWindow(QMainWindow):
         self.grid = QGridLayout()
 
         # 说明文案区
-        self.configuration_one = QLabel('一、每个脚本只能单独运行一次，如果存在已运行的脚本，则不可再次运行\n'
-                                        '二、其他')
+        self.configuration_one = QLabel('注意事项：\n'
+                                        '一、每个脚本只能单独运行一次，如果存在已运行的脚本，则不可再次运行\n'
+                                        '二、切换机器人配置不可为空，需填写所拥有的机器人名称\n'
+                                        '三、文件输入框内容可以编辑\n'
+                                        '    1、upgrade_version为ota升级的版本，downgrade_version为本地升级版本\n'
+                                        '    2、download_timeout_timer为下载超时时间，start_upgrade_timeout_timer为开始超时时间，'
+                                        'upgrade_timeout_timer为升级超时时间\n'
+                                        '    3、adb_device_id：为电脑连接机器人使用adb devices指令获取的device id')
         # -----------------分割符-----------------
         # 区域分割符
         self.label1 = QLabel('— — ' * 30)
@@ -109,7 +115,7 @@ class MainWindow(QMainWindow):
 
     def main_win(self):
         # 说明文案
-        self.grid.addWidget(self.configuration_one, 1, 0, 1, 10)  # x, y, n, m。x是第几行，y是第几列，n是占多少行，m是多少列
+        self.grid.addWidget(self.configuration_one, 1, 0, 1, 8)  # x, y, n, m。x是第几行，y是第几列，n是占多少行，m是多少列
 
         # -----------分割符------------
         # 区域分割符
@@ -203,10 +209,13 @@ class MainWindow(QMainWindow):
         # 执行脚本
         if self.change_file_line.text() == 'upgrade_stress_test_one':
             os.system(upgrade_stress_test_one)
+            self.status_charge('成功运行机器人upgrade_stress_test_one！')
         elif self.change_file_line.text() == 'upgrade_stress_test_two':
             os.system(upgrade_stress_test_two)
+            self.status_charge('成功运行机器人upgrade_stress_test_two！')
         else:
             os.system(upgrade_stress_test_three)
+            self.status_charge('成功运行机器人upgrade_stress_test_three！')
 
 
 
