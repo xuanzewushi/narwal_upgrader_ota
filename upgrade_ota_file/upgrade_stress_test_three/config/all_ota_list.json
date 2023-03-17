@@ -1,0 +1,163 @@
+{
+    "001": {
+        "version": "v00.08.02.09",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 0,
+        "remarks": "kol-cn"
+    },
+    "002": {
+        "version": "v00.08.02.21",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 0,
+        "remarks": "kol-global"
+    },
+    "003": {
+        "version": "v00.09.01.17",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 0,
+        "remarks": "kol-all"
+    },
+    "004": {
+        "version": "v01.00.00.03",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 0,
+        "remarks": "MP-cn"
+    },
+    "005": {
+        "version": "v01.00.00.06",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 0,
+        "remarks": "kol-all"
+    },
+    "006": {
+        "version": "v01.00.00.14",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "MP-global"
+    },
+    "007": {
+        "version": "v01.00.01.11",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 0,
+        "remarks": "kol-all"
+    },
+    "008": {
+        "version": "v01.00.01.19",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 0,
+        "remarks": "kol-all"
+    },
+    "009": {
+        "version": "v01.00.01.25",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "MP-all&kol-all"
+    },
+    "010": {
+        "version": "v01.00.02.20",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA1-10K"
+    },
+    "011": {
+        "version": "v01.00.02.33",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA1-1-all"
+    },
+    "012": {
+        "version": "v01.00.03.00",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA2-2.5K"
+    },
+    "013": {
+        "version": "v01.00.03.01",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA2-1-all"
+    },
+    "014": {
+        "version": "v01.01.00.29",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA3-3K"
+    },
+    "015": {
+        "version": "v01.01.00.31",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA3-1-all"
+    },
+    "016": {
+        "version": "v01.01.01.18",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA4-1K"
+    },
+    "017": {
+        "version": "v01.01.01.21",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA4-1-4K"
+    },
+    "018": {
+        "version": "v01.01.02.33",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA5-all"
+    },
+    "019": {
+        "version": "v01.01.03.00",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA5-1-1K"
+    },
+    "020": {
+        "version": "v01.01.02.34",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "MP-for-no-au"
+    },
+    "021": {
+        "version": "v01.01.02.35",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "MP-for-au"
+    },
+    "022": {
+        "version": "v01.02.00.24",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA6-all"
+    },
+    "023": {
+        "version": "v01.02.01.13",
+        "SWU": 1,
+        "pivotal": 0,
+        "test_flag": 1,
+        "remarks": "OTA7-all"
+    }
+}

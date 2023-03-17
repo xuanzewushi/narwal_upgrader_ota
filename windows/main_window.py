@@ -53,7 +53,8 @@ class MainWindow(QMainWindow):
                                         '    1、upgrade_version为ota升级的版本，downgrade_version为本地升级版本\n'
                                         '    2、download_timeout_timer为下载超时时间，start_upgrade_timeout_timer为开始超时时间，'
                                         'upgrade_timeout_timer为升级超时时间\n'
-                                        '    3、adb_device_id：为电脑连接机器人使用adb devices指令获取的device id')
+                                        '    3、adb_device_id：为电脑连接机器人使用adb devices指令获取的adb device id\n'
+                                        '四、测试多台机器人时，机器人的adb device id必须修改成不同的')
         # -----------------分割符-----------------
         # 区域分割符
         self.label1 = QLabel('— — ' * 30)
