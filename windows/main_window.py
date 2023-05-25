@@ -48,9 +48,9 @@ class MainWindow(QMainWindow):
         # 说明文案区
         self.configuration_one = QLabel('注意事项：\n'
                                         '一、每个脚本只能单独运行一次，如果存在已运行的脚本，则不可再次运行\n'
-                                        '二、切换机器人配置不可为空，需填写所拥有的机器人名称\n'
+                                        '二、切换脚本文件配置不可为空，需填写所拥有的脚本文件名称\n'
                                         '三、文件输入框内容可以编辑\n'
-                                        '    1、upgrade_version为ota升级的版本，downgrade_version为本地升级版本\n'
+                                        '    1、upgrade_version为ota升级的版本，downgrade_version为本地回退版本\n'
                                         '    2、download_timeout_timer为下载超时时间，start_upgrade_timeout_timer为开始超时时间，'
                                         'upgrade_timeout_timer为升级超时时间\n'
                                         '    3、adb_device_id：为电脑连接机器人使用adb devices指令获取的adb device id\n'
@@ -60,11 +60,11 @@ class MainWindow(QMainWindow):
         self.label1 = QLabel('— — ' * 30)
 
         # 刷新按钮
-        self.renovate = QPushButton('刷新')
-        self.renovate.clicked.connect(self.renovate_click)
+        # self.renovate = QPushButton('刷新')
+        # self.renovate.clicked.connect(self.renovate_click)
 
         # 文案
-        self.robot_times = QLabel('当前可执行机器人：' + get_robot_times())
+        self.robot_times = QLabel('当前拥有脚本文件数量：' + get_robot_times())
         # self.run_robot_times = QLabel('当前正在执行的机器人数量：')
 
         # 运行脚本按钮
@@ -76,22 +76,23 @@ class MainWindow(QMainWindow):
 
         # -----------------分割符-----------------
         # 区域分割符
-        self.label2 = QLabel('— — '*13 + '当前选中第1个机器人' + '— — '*13)
+        self.label2 = QLabel('— — '*13 + '当前选中第1个脚本文件' + '— — '*13)
         self.label2.repaint()
 
         # 文案
-        self.robot_data = QLabel('所拥有的机器人：' + get_robots())
+        self.robot_data = QLabel('所拥有的脚本文件：' + get_robots())
         self.stress_test_config = QLabel('stress_test_config.ini文件：')
         self.robot_adb_config = QLabel('robot_adb_config.ini文件：')
 
         # 文件文本框
+        _path = get_robot()[0]
         self.stress_test_config_text = QTextEdit()
-        self.stress_test_config_text.setPlainText(self.get_data('upgrade_stress_test_one', 'stress_test_config.ini'))
+        self.stress_test_config_text.setPlainText(self.get_data(_path, 'stress_test_config.ini'))
         self.robot_adb_config_text = QTextEdit()
-        self.robot_adb_config_text.setPlainText(self.get_data('upgrade_stress_test_one', 'robot_adb_config.ini'))
+        self.robot_adb_config_text.setPlainText(self.get_data(_path, 'robot_adb_config.ini'))
 
         # 按钮
-        self.change_file = QPushButton('切换机器人配置')
+        self.change_file = QPushButton('切换脚本文件')
         self.change_file.clicked.connect(self.change_robot)
         self.write_stress_test_config_text = QPushButton('保存编辑')
         self.write_stress_test_config_text.clicked.connect(self.write_stress_test_config)
@@ -100,7 +101,7 @@ class MainWindow(QMainWindow):
 
         # 切换机器人输入框
         self.change_file_line = QLineEdit()
-        self.change_file_line.setText('upgrade_stress_test_one')
+        self.change_file_line.setText(str(get_robot()[0]))
 
         self.setLayout(self.grid)
 
@@ -128,7 +129,7 @@ class MainWindow(QMainWindow):
 
         # 按钮
         self.grid.addWidget(self.run_button, 5, 0)
-        self.grid.addWidget(self.renovate, 5, 1)
+        # self.grid.addWidget(self.renovate, 5, 1)
 
         # -----------分割符------------
         # 区域分割符
@@ -166,57 +167,46 @@ class MainWindow(QMainWindow):
         return OprateIni(path, name).read_ini_data()
 
     def write_stress_test_config(self):
-        path = 'upgrade_stress_test_one'
+        _path = self.change_file_line.text()
         name = 'stress_test_config.ini'
         data = self.stress_test_config_text.toPlainText()
-        OprateIni(path, name, data).write_ini_data()
+        OprateIni(_path, name, data).write_ini_data()
         self.status_charge('写入成功！')
 
     def write_robot_adb_config(self):
-        path = 'upgrade_stress_test_one'
+        _path = self.change_file_line.text()
         name = 'robot_adb_config.ini'
         data = self.robot_adb_config_text.toPlainText()
-        OprateIni(path, name, data).write_ini_data()
+        OprateIni(_path, name, data).write_ini_data()
         self.status_charge('写入成功！')
 
     def renovate_click(self):
-        path = 'upgrade_stress_test_one'
+        _path = get_robot()[0]
         stress_name = 'stress_test_config.ini'
         robot_name = 'robot_adb_config.ini'
-        self.stress_test_config_text.setPlainText(self.get_data(path, stress_name))
-        self.robot_adb_config_text.setPlainText(self.get_data(path, robot_name))
+        self.stress_test_config_text.setPlainText(self.get_data(_path, stress_name))
+        self.robot_adb_config_text.setPlainText(self.get_data(_path, robot_name))
 
     def change_robot(self):
-        path = self.change_file_line.text()
+        _path = self.change_file_line.text()
         stress_name = 'stress_test_config.ini'
         robot_name = 'robot_adb_config.ini'
-        robot_list = ['one', 'two', 'three', 'four', 'five']
-        for i in range(len(robot_list)):
-            if robot_list[i] == path.split('_')[-1]:
-                self.label2.setText('— — '*13 + '当前选中第' + str(i+1) + '个机器人' + '— — '*13)
-        self.stress_test_config_text.setPlainText(self.get_data(path, stress_name))
-        self.robot_adb_config_text.setPlainText(self.get_data(path, robot_name))
+        # robot_list = ['one', 'two', 'three', 'four', 'five']
+        for i in range(len(get_robot())):
+            self.label2.setText('— — '*10 + '当前已打开[' + get_robot()[i] + ']的脚本文件' + '— — '*10)
+        self.stress_test_config_text.setPlainText(self.get_data(_path, stress_name))
+        self.robot_adb_config_text.setPlainText(self.get_data(_path, robot_name))
         self.status_charge('切换配置成功！')
 
     def status_charge(self, msg):
         self.statusBar().showMessage(msg)
 
     def upgrade(self):
-        upgrade_stress_test_one = "gnome-terminal -e 'bash -c \"echo asdf1234 |sudo -S ./upgrade_ota_file/upgrade_stress_test_one/upgrade_stress_test; exec bash\"'"
-        upgrade_stress_test_two = "gnome-terminal -e 'bash -c " \
-                                  "\"echo asdf1234 |sudo -S ./upgrade_ota_file/upgrade_stress_test_two/upgrade_stress_test; exec bash\"'"
-        upgrade_stress_test_three = "gnome-terminal -e 'bash -c " \
-                                    "\"echo asdf1234 |sudo -S ./upgrade_ota_file/upgrade_stress_test_three/upgrade_stress_test; exec bash\"'"
+        _path = self.change_file_line.text()
+        upgrade_stress_test_one = "gnome-terminal -e 'bash -c \"echo qwer1234 |sudo -S ./upgrade_ota_file/" + str(_path) + "/upgrade_stress_test; exec bash\"'"
         # 执行脚本
-        if self.change_file_line.text() == 'upgrade_stress_test_one':
-            os.system(upgrade_stress_test_one)
-            self.status_charge('成功运行机器人upgrade_stress_test_one！')
-        elif self.change_file_line.text() == 'upgrade_stress_test_two':
-            os.system(upgrade_stress_test_two)
-            self.status_charge('成功运行机器人upgrade_stress_test_two！')
-        else:
-            os.system(upgrade_stress_test_three)
-            self.status_charge('成功运行机器人upgrade_stress_test_three！')
+        os.system(upgrade_stress_test_one)
+        self.status_charge('成功运行脚本' + str(_path))
 
 
 

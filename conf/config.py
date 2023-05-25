@@ -24,12 +24,10 @@ def get_robots():
 
 def get_robot():
     robot_file_times = os.listdir('./upgrade_ota_file/')
-    robots = ''
-    for i in robot_file_times:
-        robots = robots + i + ', '
-    return robots
+    return robot_file_times
 
 
 #
 # if __name__ == '__main__':
-#     get_robots()
+#     a = get_robots()
+#     print(a[0])
