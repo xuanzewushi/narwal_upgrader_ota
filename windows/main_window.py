@@ -14,6 +14,7 @@ import yaml
 from PyQt6.QtWidgets import *
 from conf.config import *
 from conf.oprate_ini_file import OprateIni
+from PyQt6 import QtWidgets
 
 """
 1.新增压测机器人数量
@@ -74,11 +75,6 @@ class MainWindow(QMainWindow):
         # 输入框
         # self.robot_times_edit = QLineEdit()
 
-        # -----------------分割符-----------------
-        # 区域分割符
-        self.label2 = QLabel('— — '*13 + '当前选中第1个脚本文件' + '— — '*13)
-        self.label2.repaint()
-
         # 文案
         self.robot_data = QLabel('所拥有的脚本文件：' + get_robots())
         self.stress_test_config = QLabel('stress_test_config.ini文件：')
@@ -100,8 +96,17 @@ class MainWindow(QMainWindow):
         self.write_robot_adb_config_text.clicked.connect(self.write_robot_adb_config)
 
         # 切换机器人输入框
-        self.change_file_line = QLineEdit()
-        self.change_file_line.setText(str(get_robot()[0]))
+        # self.change_file_line = QLineEdit()
+        # self.change_file_line.setText(str(get_robot()[0]))
+        self.change_file_QComboBox = QtWidgets.QComboBox()
+        self.change_file_QComboBox.addItems(get_robot())
+        self.change_file_QComboBox.currentIndexChanged.connect(self.print_value)
+        self.change_file_QComboBox.highlighted.connect(self.print_value)
+
+        # -----------------分割符-----------------
+        # 区域分割符
+        self.label2 = QLabel('— — '*10 + '当前已打开[' + self.change_file_QComboBox.currentText() + ']的脚本文件' + '— — '*10)
+        self.label2.repaint()
 
         self.setLayout(self.grid)
 
@@ -114,6 +119,9 @@ class MainWindow(QMainWindow):
         self.statusBar()
         self.main_win()
         self.show()
+
+    def print_value(self, i):
+        print(i)
 
     def main_win(self):
         # 说明文案
@@ -144,9 +152,10 @@ class MainWindow(QMainWindow):
         self.grid.addWidget(self.write_robot_adb_config_text, 13, 4)
 
         # 切换机器人输入框
-        self.grid.addWidget(self.change_file_line, 8, 1, 1, 3)
+        # self.grid.addWidget(self.change_file_line, 8, 1, 1, 3)
+        self.grid.addWidget(self.change_file_QComboBox, 8, 1, 1, 3)
         # 输入框默认文案
-        self.change_file_line.setPlaceholderText('ota升级的固件版本')
+        # self.change_file_line.setPlaceholderText('ota升级的固件版本')
 
         # 文件内容说明文案
         self.grid.addWidget(self.stress_test_config, 9, 0, 1, 1)
@@ -167,14 +176,14 @@ class MainWindow(QMainWindow):
         return OprateIni(path, name).read_ini_data()
 
     def write_stress_test_config(self):
-        _path = self.change_file_line.text()
+        _path = self.change_file_QComboBox.currentText()
         name = 'stress_test_config.ini'
         data = self.stress_test_config_text.toPlainText()
         OprateIni(_path, name, data).write_ini_data()
         self.status_charge('写入成功！')
 
     def write_robot_adb_config(self):
-        _path = self.change_file_line.text()
+        _path = self.change_file_QComboBox.currentText()
         name = 'robot_adb_config.ini'
         data = self.robot_adb_config_text.toPlainText()
         OprateIni(_path, name, data).write_ini_data()
@@ -188,12 +197,12 @@ class MainWindow(QMainWindow):
         self.robot_adb_config_text.setPlainText(self.get_data(_path, robot_name))
 
     def change_robot(self):
-        _path = self.change_file_line.text()
+        _path = self.change_file_QComboBox.currentText()
         stress_name = 'stress_test_config.ini'
         robot_name = 'robot_adb_config.ini'
         # robot_list = ['one', 'two', 'three', 'four', 'five']
         for i in range(len(get_robot())):
-            self.label2.setText('— — '*10 + '当前已打开[' + get_robot()[i] + ']的脚本文件' + '— — '*10)
+            self.label2.setText('— — '*10 + '当前已打开[' + self.change_file_QComboBox.currentText() + ']的脚本文件' + '— — '*10)
         self.stress_test_config_text.setPlainText(self.get_data(_path, stress_name))
         self.robot_adb_config_text.setPlainText(self.get_data(_path, robot_name))
         self.status_charge('切换配置成功！')
@@ -202,7 +211,7 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage(msg)
 
     def upgrade(self):
-        _path = self.change_file_line.text()
+        _path = self.change_file_QComboBox.currentText()
         upgrade_stress_test_one = "gnome-terminal -e 'bash -c \"echo qwer1234 |sudo -S ./upgrade_ota_file/" + str(_path) + "/upgrade_stress_test; exec bash\"'"
         # 执行脚本
         os.system(upgrade_stress_test_one)
